@@ -65,7 +65,7 @@ namespace BlogApp.Server.Services
             string authHeader = request.Headers.Authorization.ToString();
             if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Basic"))
             {
-                string encodedUserNamePass = authHeader.Replace("Basic ", "");
+                string encodedUserNamePass = authHeader.Replace("Basic", "");
                 var encoding = Encoding.GetEncoding("iso-8859-1");
                 string[] namePassArray = encoding.GetString(Convert.FromBase64String(encodedUserNamePass)).Split(':');
                 userName = namePassArray[0];

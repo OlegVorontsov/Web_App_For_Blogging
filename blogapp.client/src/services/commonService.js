@@ -37,14 +37,14 @@ function sendAuthenticatedRequest(url, method, username, password, data) {
         method: method,
         headers: headers,
         body: data ? JSON.stringify(data) : undefined
-    }
+    };
 
-    return fetch(url, requestOptions)
-    .then(function(response) {
+    fetch(url, requestOptions)
+        .then(function(response) {
         if(response.ok) {
             return response.json();
         } else {
-            throw new Error('Ошибка', response.status + ':' + response.statusText);
+            throw new Error('Ошибка' + response.status + ':' + response.statusText);
         }
     });
 }
