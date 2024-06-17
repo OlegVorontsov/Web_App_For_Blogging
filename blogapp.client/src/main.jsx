@@ -7,6 +7,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Login from './components/users/Login'
+import UserProfile from './components/users/UserProfile';
+import {LOGIN_URL, PROFILE_URL} from './services/commonService';
 
 const router = createBrowserRouter([
   {
@@ -19,8 +21,12 @@ const router = createBrowserRouter([
     element: <div>About</div>
   },
   {
-    path: '/login',
+    path: LOGIN_URL,
     element: <Login />
+  },
+  {
+    path: PROFILE_URL,
+    element: <UserProfile />
   }
 ]);
 

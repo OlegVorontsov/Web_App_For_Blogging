@@ -138,7 +138,7 @@ namespace BlogApp.Server.Services
                 Photo = user.Photo
             };
         }
-        private UserProfileModel ToProfileModel(User user)
+        public UserProfileModel ToProfileModel(User user)
         {
             var userSubs = _noSQLDataService.GetUserSub(user.Id);
             return new UserProfileModel

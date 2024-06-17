@@ -29,14 +29,8 @@ namespace BlogApp.Server.Controllers
             {
                 return NotFound();
             }
-            return Ok( new UserModel
-            {
-                Id = currentUser.Id,
-                Name = currentUser.Name,
-                Email = currentUser.Email,
-                Description = currentUser.Description,
-                Photo = currentUser.Photo
-            });
+            var userProfile = _userService.ToProfileModel(currentUser);
+            return Ok(userProfile);
         }
         [HttpPost]
         [AllowAnonymous]
