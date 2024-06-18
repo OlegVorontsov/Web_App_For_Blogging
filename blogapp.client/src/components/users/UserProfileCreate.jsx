@@ -9,19 +9,23 @@ const UserProfileCreate = ({user, setAction}) => {
   const [userPassword, setUserPassword] = useState();
   const [userDescription, setUserDescription] = useState(user.description);
   const [userPhoto, setUserPhoto] = useState(user.photo);
+  const [userPhotoStr, setUserPhotoStr] = useState('');
 
   const endCreate = () => {
     if(userPassword.lenght === 0) return;
-    
+
     const newUser = {
+      id: user.id,
       name: userName,
       email: userEmail,
+      description: userDescription,
       password: userPassword,
-      photo: userPhoto,
-      description: userDescription
+      photo: userPhoto
     }
     setAction(newUser);
   }
+
+  const img = userPhotoStr.length > 0 ? <img src = {userPhotoStr} alt='Image'/> : <ImageComponent base64String={user.photo} />;
 
   // Рендеринг компонента с данными пользователя
   return (
@@ -35,8 +39,8 @@ const UserProfileCreate = ({user, setAction}) => {
       <input type='password' defaultValue={userPassword} onChange={e => setUserPassword(e.target.value)} />
       <p>Description</p>
       <textarea type='text' defaultValue={userDescription} onChange={e => setUserDescription(e.target.value)} />
-      <ImageUploader byteImageAction={(bytes) => setUserPhoto(bytes)} />
-      <ImageComponent byteArray={user.photo} />
+      {img}
+      <ImageUploader byteImageAction={(str, bytes) => {setUserPhoto(bytes); setUserPhotoStr(str)}} />
       <button onClick={endCreate}>Ok</button>
     </div>
   );

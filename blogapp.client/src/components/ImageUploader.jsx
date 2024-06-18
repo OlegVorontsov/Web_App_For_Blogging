@@ -4,13 +4,14 @@ const ImageUploader = ({byteImageAction}) => {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    setSelectedFile(file);
 
     if (file) {
       const reader = new FileReader();
+
       reader.onload = (e) => {
+        const fileString = e.target.result;
         const byteArray = new Uint8Array(e.target.result);
-        byteImageAction(byteArray);
+        byteImageAction(fileString, byteArray);
       };
       reader.readAsArrayBuffer(file);
     }
@@ -19,7 +20,7 @@ const ImageUploader = ({byteImageAction}) => {
   return (
     <div>
       <h2>Загрузка изображения</h2>
-        <input type="file" accept="image/*" onChange={handleFileChange} />
+      <input type="file" accept="image/*" onChange={handleFileChange} />
     </div>
   );
 };

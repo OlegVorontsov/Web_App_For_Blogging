@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GetUser, UpdateUser } from '../../services/usersService';
+import { GetUser, updateUser } from '../../services/usersService';
 import ImageComponent from '../ImageComponent';
 import ModalButton from '../ModalButton';
 import UserProfileCreate from './UserProfileCreate';
@@ -7,11 +7,12 @@ import UserProfileCreate from './UserProfileCreate';
 const UserProfile = () => {
   // Состояние для хранения данных пользователя
   const [user, setUser] = useState({
+    id: '',
     name: '',
     email: '',
+    description: '',
     password: '',
-    photo: '',
-    description: ''
+    photo: ''
   });
 
   // Загрузка данных пользователя с помощью useEffect и fetch
@@ -23,9 +24,9 @@ const UserProfile = () => {
     fetchUser();
   }, []);
 
-  const userUpdate = (newUser) => {
+  const updateUserView = (newUser) => {
     setUser(newUser);
-    UpdateUser(newUser);
+    updateUser(newUser);
   }
 
   // Рендеринг компонента с данными пользователя
@@ -35,8 +36,8 @@ const UserProfile = () => {
       <p>Name: {user.name}</p>
       <p>Email: {user.email}</p>
       <p>Description: {user.description}</p>
-      <ImageComponent byteArray={user.photo} />
-      <ModalButton modalContent = {<UserProfileCreate user={user} setAction = {userUpdate}/>} title = 'Edit' />
+      <ImageComponent base64String={user.photo} />
+      <ModalButton modalContent = {<UserProfileCreate user={user} setAction = {updateUserView}/>} title = 'Edit' />
     </div>
   );
 };
