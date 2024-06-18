@@ -31,15 +31,26 @@ const UserProfile = () => {
 
   // Рендеринг компонента с данными пользователя
   return (
-    <div>
+    <div style={{textAlign: 'left'}}>
       <h2>User Profile</h2>
-      <p>Name: {user.name}</p>
-      <p>Email: {user.email}</p>
-      <p>Description: {user.description}</p>
-      <ImageComponent base64String={user.photo} />
-      <ModalButton modalContent = {<UserProfileCreate user={user} setAction = {updateUserView}/>} title = 'Edit' />
-      <button className="btn btn-secondary" onClick={() => exitFromProfile()}>Sign out</button>
-    </div>
+      <div style={{display: 'flex'}}>
+        <div className='image-box' style={{width: '50%', marginRight: '20px'}}>
+          <ImageComponent base64String={user.photo} />
+        </div>
+        <div className='user-data'>
+          <p>Name: {user.name}</p>
+          <p>Email: {user.email}</p>
+          <p>Description: {user.description}</p>
+          <div style={{display: 'flex', gap: '10px'}}>
+            <ModalButton
+              btnName={'Edit'}
+              modalContent = {<UserProfileCreate user={user} setAction = {updateUserView}/>}
+              title = 'Edit' />
+            <button className="btn btn-secondary" onClick={() => exitFromProfile()}>Sign out</button>
+          </div>
+        </div>
+      </div>
+    </div>  
   );
 };
 

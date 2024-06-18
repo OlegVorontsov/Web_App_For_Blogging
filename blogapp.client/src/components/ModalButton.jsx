@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const ModalButton = ({ modalContent, title }) => {
+const ModalButton = ({ modalContent, title, btnName }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleCloseModal = () => setShowModal(false);
@@ -12,7 +12,7 @@ const ModalButton = ({ modalContent, title }) => {
   return (
     <>
       <Button variant="primary" onClick={handleOpenModal}>
-        Edit
+        {btnName}
       </Button>
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
