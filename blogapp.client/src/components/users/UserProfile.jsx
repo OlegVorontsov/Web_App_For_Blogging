@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { GetUser } from '../../services/usersService';
+import { GetUser, UpdateUser } from '../../services/usersService';
 import ImageComponent from '../ImageComponent';
+import ModalButton from '../ModalButton';
+import UserProfileCreate from './UserProfileCreate';
 
 const UserProfile = () => {
   // Состояние для хранения данных пользователя
   const [user, setUser] = useState({
     name: '',
     email: '',
+    password: '',
     photo: '',
     description: ''
   });
@@ -18,7 +21,12 @@ const UserProfile = () => {
         setUser(data);
     };
     fetchUser();
-  }, []); 
+  }, []);
+
+  const userUpdate = (newUser) => {
+    setUser(newUser);
+    UpdateUser(newUser);
+  }
 
   // Рендеринг компонента с данными пользователя
   return (
@@ -28,6 +36,7 @@ const UserProfile = () => {
       <p>Email: {user.email}</p>
       <p>Description: {user.description}</p>
       <ImageComponent byteArray={user.photo} />
+      <ModalButton modalContent = {<UserProfileCreate user={user} setAction = {userUpdate}/>} title = 'Edit' />
     </div>
   );
 };
