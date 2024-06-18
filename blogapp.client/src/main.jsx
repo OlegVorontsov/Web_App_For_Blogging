@@ -7,8 +7,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Login from './components/users/Login'
-import UserProfile from './components/users/UserProfile';
-import {LOGIN_URL, PROFILE_URL} from './services/commonService';
+import SignUp from './components/users/SignUp'
+import UserProfile from './components/users/UserProfile'
+import {LOGIN_URL, PROFILE_URL, SIGNUP_URL} from './services/commonService'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: PROFILE_URL,
     element: <UserProfile />
+  },
+  {
+    path: SIGNUP_URL,
+    element: <SignUp />
   }
 ]);
 

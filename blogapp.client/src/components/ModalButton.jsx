@@ -12,7 +12,7 @@ const ModalButton = ({ modalContent, title }) => {
   return (
     <>
       <Button variant="primary" onClick={handleOpenModal}>
-        Open Modal
+        Edit
       </Button>
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>

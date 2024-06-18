@@ -4,7 +4,7 @@ const NEWS_URL = 'news';
 
 const BASE_URL = 'login';
 const TOKEN_NAME = 'Token';
-
+export const SIGNUP_URL = '/signup';
 export const LOGIN_URL = '/login';
 export const PROFILE_URL = '/profile';
 
@@ -43,10 +43,13 @@ async function sendAuthenticatedRequest(url, method, username, password, data) {
         }
 }
 
-export async function sendRequestWithToken(url, method, data) {
+export async function sendRequestWithToken(url, method, data, withToken = true) {
     const headers = new Headers();
-    const token = localStorage.getItem(TOKEN_NAME);
-    headers.set('Authorization', `Bearer ${token}`);
+
+    if(withToken){
+        const token = localStorage.getItem(TOKEN_NAME);
+        headers.set('Authorization', `Bearer ${token}`);
+    }
 
     if(data) {
         headers.set('Content-Type', 'application/json');
