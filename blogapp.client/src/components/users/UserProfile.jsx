@@ -3,11 +3,12 @@ import { GetUser, exitFromProfile, updateUser } from '../../services/usersServic
 import ImageComponent from '../ImageComponent';
 import ModalButton from '../ModalButton';
 import UserProfileCreate from './UserProfileCreate';
+import NewsByUser from '../news/News';
 
 const UserProfile = () => {
   // Состояние для хранения данных пользователя
   const [user, setUser] = useState({
-    id: '',
+    id: 0,
     name: '',
     email: '',
     description: '',
@@ -50,6 +51,7 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
+      <NewsByUser userId={user.id} />
     </div>  
   );
 };

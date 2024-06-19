@@ -49,6 +49,10 @@ export default defineConfig({
             '^/account': {
                 target: 'https://localhost:7057/',
                 secure: false
+            },
+            '^/news': {
+                target: 'https://localhost:7057/',
+                secure: false
             }
         },
         port: 5173,

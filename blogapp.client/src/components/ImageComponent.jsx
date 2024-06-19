@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ImageComponent = ({ base64String }) => {
-  if(base64String === null) return <img alt='Image'/>;
+  if(base64String === null) return <div></div>;
 
   const imageUrl = `data:image/jpeg;base64,${base64String}`;
 

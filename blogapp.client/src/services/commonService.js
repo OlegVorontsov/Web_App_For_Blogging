@@ -1,6 +1,6 @@
 export const ACCOUNT_URL = 'account';
 export const USERS_URL = 'users';
-const NEWS_URL = 'news';
+export const NEWS_URL = 'news';
 
 const BASE_URL = 'login';
 const TOKEN_NAME = 'Token';
