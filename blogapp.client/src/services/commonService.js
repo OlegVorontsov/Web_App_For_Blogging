@@ -4,6 +4,7 @@ export const NEWS_URL = 'news';
 
 const BASE_URL = 'login';
 const TOKEN_NAME = 'Token';
+const ISONLINE_NAME = 'Online';
 export const SIGNUP_URL = '/signup';
 export const LOGIN_URL = '/login';
 export const PROFILE_URL = '/profile';
@@ -12,7 +13,7 @@ export async function getToken(login, password){
     const url = ACCOUNT_URL + '/token';
     const token = await sendAuthenticatedRequest(url, 'POST', login, password);
     localStorage.setItem(TOKEN_NAME, token.accessToken);
-
+    localStorage.setItem(ISONLINE_NAME, '1');
     window.location.href = PROFILE_URL;
 }
 
@@ -77,6 +78,18 @@ export async function sendRequestWithToken(url, method, data, withToken = true) 
 function errorRequest(status){
     if(status === 401) {
         window.location.href = BASE_URL;
+        cleareStorage();
     }
+}
+
+export function cleareStorage(){
+    localStorage.clear();
+}
+
+export function isUserOnline(){
+    if(localStorage.getItem(ISONLINE_NAME === '1')){
+        return true;
+    }
+    return false;
 }
 

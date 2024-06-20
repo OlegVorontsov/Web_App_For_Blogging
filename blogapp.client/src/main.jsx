@@ -11,6 +11,7 @@ import SignUp from './components/users/SignUp';
 import UserProfile from './components/users/UserProfile';
 import {LOGIN_URL, PROFILE_URL, SIGNUP_URL, USERS_URL} from './services/commonService';
 import UserPublicView from './components/users/UserPublicView';
+import SearchUser from './components/users/SearchUser';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: '/:userId',
     element: <UserPublicView />
+  },
+  {
+    path: '/all',
+    element: <SearchUser />
   }
 ]);
 

@@ -25,3 +25,13 @@ th, td {
     border: 1px solid #0365d630;
     border-radius: 10px;
 }
+
+.user-short {
+    display: flex;
+    cursor: pointer;
+}
+
+.user-short-img {
+    width: 20%;
+    margin-right: 20px;
+}
