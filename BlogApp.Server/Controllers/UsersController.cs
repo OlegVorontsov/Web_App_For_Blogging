@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApp.Server.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
     [Authorize]
+    [Route("[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly UsersService _userService;

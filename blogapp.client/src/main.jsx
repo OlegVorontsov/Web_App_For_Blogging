@@ -1,15 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './index.css';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Login from './components/users/Login'
-import SignUp from './components/users/SignUp'
-import UserProfile from './components/users/UserProfile'
-import {LOGIN_URL, PROFILE_URL, SIGNUP_URL} from './services/commonService'
+import Login from './components/users/Login';
+import SignUp from './components/users/SignUp';
+import UserProfile from './components/users/UserProfile';
+import {LOGIN_URL, PROFILE_URL, SIGNUP_URL, USERS_URL} from './services/commonService';
+import UserPublicView from './components/users/UserPublicView';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: SIGNUP_URL,
     element: <SignUp />
+  },
+  {
+    path: '/:userId',
+    element: <UserPublicView />
   }
 ]);
 

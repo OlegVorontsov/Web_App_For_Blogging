@@ -1,7 +1,12 @@
-import { sendRequestWithToken, ACCOUNT_URL, PROFILE_URL, LOGIN_URL } from './commonService';
+import { sendRequestWithToken, ACCOUNT_URL, PROFILE_URL, LOGIN_URL, USERS_URL } from './commonService';
 
 export async function GetUser(){
     var user = await sendRequestWithToken(ACCOUNT_URL, 'GET');
+    return user;
+}
+
+export async function GetPublicUser(userId){
+    var user = await sendRequestWithToken(`${USERS_URL}/${userId}`, 'GET');
     return user;
 }
 
