@@ -9,9 +9,10 @@ import {
 import Login from './components/users/Login';
 import SignUp from './components/users/SignUp';
 import UserProfile from './components/users/UserProfile';
-import {LOGIN_URL, PROFILE_URL, SIGNUP_URL, USERS_URL} from './services/commonService';
+import {LOGIN_URL, NEWS_URL, PROFILE_URL, SIGNUP_URL, USERS_URL} from './services/commonService';
 import UserPublicView from './components/users/UserPublicView';
 import SearchUser from './components/users/SearchUser';
+import NewsCreate from './components/news/NewsCreate';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
   {
     path: '/all',
     element: <SearchUser />
+  },
+  {
+    path: NEWS_URL,
+    element: <NewsCreate />
   }
 ]);
 

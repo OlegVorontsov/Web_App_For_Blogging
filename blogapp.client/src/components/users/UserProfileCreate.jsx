@@ -38,7 +38,7 @@ const UserProfileCreate = ({user, setAction}) => {
       <p>Password</p>
       <input type='password' defaultValue={userPassword} onChange={e => setUserPassword(e.target.value)} />
       <p>Description</p>
-      <textarea type='text' defaultValue={userDescription} onChange={e => setUserDescription(e.target.value)} />
+      <textarea defaultValue={userDescription} onChange={e => setUserDescription(e.target.value)} />
       {img}
       <ImageUploader byteImageAction={(str, bytes) => {setUserPhoto(bytes); setUserPhotoStr(str)}} />
       <button onClick={endCreate}>Ok</button>

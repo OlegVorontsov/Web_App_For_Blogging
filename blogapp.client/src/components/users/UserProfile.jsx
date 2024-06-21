@@ -27,7 +27,7 @@ const UserProfile = () => {
   const updateUserView = (newUser) => {
     setUser(newUser);
     updateUser(newUser);
-  }
+  };
 
   // Рендеринг компонента с данными пользователя
   return (

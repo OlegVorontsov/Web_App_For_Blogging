@@ -13,12 +13,12 @@ namespace BlogApp.Server.Services
             _dataContext = dataContext;
             _noSQLDataService = noSQLDataService;
         }
-        public List<NewsModel> GetByAuthor(int userId)
+        public List<NewsView> GetByAuthor(int userId)
         {
             var news = _dataContext.News.Where(n => n.AuthorId == userId)
                                         .OrderBy(x => x.PostDate)
                                         .Reverse()
-                                        .Select(ToModel)
+                                        .Select(ToView)
                                         .ToList();
             return news;
         }
@@ -28,7 +28,7 @@ namespace BlogApp.Server.Services
             {
                 AuthorId = userId,
                 Text = newsModel.Text,
-                Img = newsModel.Img,
+                Img = ImgService.GetPhoto(newsModel.Img),
                 PostDate = DateTime.Now
             };
             _dataContext.News.Add(newNews);
@@ -46,7 +46,7 @@ namespace BlogApp.Server.Services
                 {
                     AuthorId = userId,
                     Text = newsModel.Text,
-                    Img = newsModel.Img,
+                    Img = ImgService.GetPhoto(newsModel.Img),
                     PostDate = DateTime.Now
                 };
                 _dataContext.News.Add(newNews);
@@ -54,7 +54,7 @@ namespace BlogApp.Server.Services
             _dataContext.SaveChanges();
             return newsModels;
         }
-        public NewsModel Update(NewsModel newsModel, int userId)
+        public NewsView Update(NewsModel newsModel, int userId)
         {
             var newsToUpdate = _dataContext.News
                                            .FirstOrDefault(n => n.Id == newsModel.Id && n.AuthorId == userId);
@@ -63,14 +63,14 @@ namespace BlogApp.Server.Services
                 return null;
             }
             newsToUpdate.Text = newsModel.Text;
-            newsToUpdate.Img = newsModel.Img;
+            newsToUpdate.Img = ImgService.GetPhoto(newsModel.Img);
 
             _dataContext.News.Update(newsToUpdate);
             _dataContext.SaveChanges();
 
-            newsModel = ToModel(newsToUpdate);
+            var newsView = ToView(newsToUpdate);
 
-            return newsModel;
+            return newsView;
         }
         public void Delete(int newsId, int userId)
         {
@@ -83,16 +83,16 @@ namespace BlogApp.Server.Services
             _dataContext.News.Remove(newsToDelete);
             _dataContext.SaveChangesAsync();
         }
-        public List<NewsModel> GetNewsForCurrentUser(int userId)
+        public List<NewsView> GetNewsForCurrentUser(int userId)
         {
             var subs = _noSQLDataService.GetUserSub(userId);
-            var allNews = new List<NewsModel>();
+            var allNews = new List<NewsView>();
             if (subs is null) return allNews;
             foreach (var sub in subs.UserSubsList)
             {
                 var allNewsByAuthor = _dataContext.News
                                                   .Where(n => n.AuthorId == sub.Id).ToList();
-                allNews.AddRange(allNewsByAuthor.Select(ToModel));
+                allNews.AddRange(allNewsByAuthor.Select(ToView));
             }
             allNews.Sort(new NewsComparer());
             return allNews;
@@ -103,10 +103,11 @@ namespace BlogApp.Server.Services
                 from: userId,
                 newsId: newsId);
         }
-        private NewsModel ToModel(News news)
+
+        private NewsView ToView(News news)
         {
             var likes = _noSQLDataService.GetNewsLike(news.Id);
-            var newsModel = new NewsModel
+            var newsModel = new NewsView
             {
                 Id = news.Id,
                 Text = news.Text,
@@ -117,9 +118,9 @@ namespace BlogApp.Server.Services
             return newsModel;
         }
     }
-    class NewsComparer : IComparer<NewsModel>
+    class NewsComparer : IComparer<NewsView>
     {
-        public int Compare(NewsModel? x, NewsModel? y)
+        public int Compare(NewsView? x, NewsView? y)
         {
             if(x.PostDate > y.PostDate) return -1;
             if (x.PostDate < y.PostDate) return 1;

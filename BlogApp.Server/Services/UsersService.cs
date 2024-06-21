@@ -22,7 +22,7 @@ namespace BlogApp.Server.Services
                 Email = userModel.Email,
                 Password = userModel.Password,
                 Description = userModel.Description,
-                Photo = userModel.GetPhoto()
+                Photo = ImgService.GetPhoto(userModel.Photo)
             };
             _dataContext.Users.Add(newUser);
             _dataContext.SaveChangesAsync();
@@ -38,7 +38,7 @@ namespace BlogApp.Server.Services
                     Email = userModel.Email,
                     Password = userModel.Password,
                     Description = userModel.Description,
-                    Photo = userModel.GetPhoto()
+                    Photo = ImgService.GetPhoto(userModel.Photo)
                 };
                 _dataContext.Users.Add(newUser);
             }
@@ -51,7 +51,7 @@ namespace BlogApp.Server.Services
             userToUpdate.Email = userModel.Email;
             userToUpdate.Password = userModel.Password;
             userToUpdate.Description = userModel.Description;
-            userToUpdate.Photo = userModel.GetPhoto();
+            userToUpdate.Photo = ImgService.GetPhoto(userModel.Photo);
 
             _dataContext.Users.Update(userToUpdate);
             _dataContext.SaveChangesAsync();

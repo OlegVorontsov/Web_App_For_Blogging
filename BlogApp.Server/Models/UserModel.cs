@@ -10,23 +10,5 @@ namespace BlogApp.Server.Models
         public string Password { get; set; }
         public string Description { get; set; }
         public string Photo { get; set; }
-        public byte[] GetPhoto()
-        {
-            try
-            {
-                return JsonConvert.DeserializeObject<byte[]>(Photo);
-            }
-            catch
-            {
-                try
-                {
-                    return JsonConvert.DeserializeObject<byte[]>("[" + Photo + "]");
-                }
-                catch
-                {
-                    return Array.Empty<byte>();
-                }
-            }
-        }
     }
 }

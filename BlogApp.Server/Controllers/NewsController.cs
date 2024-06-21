@@ -34,6 +34,7 @@ namespace BlogApp.Server.Controllers
             var news = _newsService.GetNewsForCurrentUser(currentUser.Id);
             return Ok(news);
         }
+
         [HttpPost]
         public IActionResult Create([FromBody] NewsModel newsModel)
         {
