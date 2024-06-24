@@ -7,9 +7,9 @@ import { PROFILE_URL } from '../../services/commonService';
 
 const UserView = ({user}) => {
 
-  const addNewNews = (news) => {
-    createNews(news);
-    //window.location.href = PROFILE_URL;
+  const addNewNews = async (news) => {
+    await createNews(news);
+    window.location.href = PROFILE_URL;
   }
 
     return (

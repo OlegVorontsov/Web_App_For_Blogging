@@ -63,8 +63,9 @@ namespace BlogApp.Server.Services
                 return null;
             }
             newsToUpdate.Text = newsModel.Text;
-            newsToUpdate.Img = ImgService.GetPhoto(newsModel.Img);
-
+            var photo = ImgService.GetPhoto(newsModel.Img);
+            if (!(newsToUpdate.Img?.Length > 10 && photo.Length < 10))
+                newsToUpdate.Img = photo;
             _dataContext.News.Update(newsToUpdate);
             _dataContext.SaveChanges();
 
