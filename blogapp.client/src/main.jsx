@@ -1,4 +1,4 @@
-import React from 'react';
+{/*import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
@@ -54,4 +54,43 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>,
-)
+)*/}
+
+// main.jsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationMenu from './NavigationMenu';
+
+import Login from './components/users/Login';
+import { PROFILE_URL } from './services/commonService';
+import UserProfile from './components/users/UserProfile';
+
+const routes = [
+  { path: '/login', element: <Login /> },
+  { path: PROFILE_URL, element: <UserProfile /> },
+];
+
+const App = () => {
+  return (
+    <Router>
+      <div>
+        <NavigationMenu />
+        <div className="container mt-4"> 
+          <Routes>
+            {routes.map((route, index) => (
+              <Route key={index} path={route.path} element={route.element} />
+            ))}
+          </Routes>
+        </div>
+      </div>
+    </Router>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
