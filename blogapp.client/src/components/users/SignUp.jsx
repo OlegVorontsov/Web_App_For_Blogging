@@ -19,7 +19,7 @@ const SignUp = () => {
     }
 
     const toLoginPage = () => {
-        window.location.href = LOGIN_URL
+        window.location.href = LOGIN_URL;
     }
 
     return (

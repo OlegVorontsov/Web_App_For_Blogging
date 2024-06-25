@@ -7,11 +7,12 @@ const ImageUploader = ({byteImageAction}) => {
 
     if (file) {
       const reader = new FileReader();
+      const imgUrl = URL.createObjectURL(file);
 
       reader.onload = (e) => {
         const fileString = e.target.result;
         const byteArray = new Uint8Array(e.target.result);
-        byteImageAction(fileString, byteArray);
+        byteImageAction(imgUrl, byteArray);
       };
       reader.readAsArrayBuffer(file);
     }

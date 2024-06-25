@@ -1,4 +1,4 @@
-import { ALLUSERS_URL, HOME_URL, LOGIN_URL, PROFILE_URL, isUserOnline } from "../services/commonService";
+import { ALLNEWS_URL, ALLUSERS_URL, HOME_URL, LOGIN_URL, PROFILE_URL, isUserOnline } from "../services/commonService";
 import { NavItem } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
@@ -11,6 +11,11 @@ const AllNavs = () => {
     ];
 
     if(isUserOnline()){
+        navs.push(
+            <NavItem className="nav-item">
+                <NavLink className="nav-link" to={ALLNEWS_URL}>Wall</NavLink>
+            </NavItem>
+        );
         navs.push(
         <NavItem className="nav-item">
             <NavLink className="nav-link" to={PROFILE_URL}>Profile</NavLink>

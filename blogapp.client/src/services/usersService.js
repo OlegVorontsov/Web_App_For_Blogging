@@ -37,3 +37,7 @@ export async function getUsersByName(userName){
     return users;
 }
 
+export async function subscribeToUser(userId){
+    await sendRequestWithToken(USERS_URL + `/subs/${userId}`, 'POST');
+}
+

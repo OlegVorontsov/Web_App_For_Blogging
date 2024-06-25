@@ -9,8 +9,9 @@ import SignUp from './components/users/SignUp';
 import UserPublicView from './components/users/UserPublicView';
 import SearchUser from './components/users/SearchUser';
 import NewsCreate from './components/news/NewsCreate';
-import { ALLUSERS_URL, HOME_URL, LOGIN_URL, NEWS_URL, PROFILE_URL, SIGNUP_URL } from './services/commonService';
+import { ALLNEWS_URL, ALLUSERS_URL, HOME_URL, LOGIN_URL, NEWS_URL, PROFILE_URL, SIGNUP_URL } from './services/commonService';
 import Home from './components/Home';
+import { NewsForUser } from './components/news/News';
 
 const routes = [
   { path: '', element: <Home /> },
@@ -18,8 +19,9 @@ const routes = [
   { path: LOGIN_URL, element: <Login /> },
   { path: PROFILE_URL, element: <UserProfile /> },
   { path: SIGNUP_URL, element: <SignUp /> },
-  { path: '/:userId', element: <UserPublicView /> },
   { path: ALLUSERS_URL, element: <SearchUser /> },
+  { path: '/:userId', element: <UserPublicView /> },
+  { path: ALLNEWS_URL, element: <NewsForUser /> },
   { path: NEWS_URL, element: <NewsCreate /> }
 ];
 

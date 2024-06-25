@@ -5,6 +5,11 @@ export async function getNewsByUser(userId) {
     return allNews;
 }
 
+export async function getNews() {
+    const allNews = await sendRequestWithToken(`${NEWS_URL}`, 'GET');
+    return allNews;
+}
+
 export async function createNews(newNews) {
     newNews.img = newNews.img.toString();
     const news = await sendRequestWithToken(NEWS_URL, 'POST', newNews);

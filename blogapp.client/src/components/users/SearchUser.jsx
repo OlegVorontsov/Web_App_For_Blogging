@@ -5,12 +5,11 @@ import { LOGIN_URL, isUserOnline } from "../../services/commonService";
 
 const SearchUser = () => {
 
-    const [userName, setUserName] = useState([]);
     const [users, setUsers] = useState([]);
 
-    if(isUserOnline()) window.location.href = LOGIN_URL;
+    if(!isUserOnline()) window.location.href = LOGIN_URL;
 
-    const getUsers = async () => {
+    const getUsers = async (userName) => {
         if(userName === '') return;
         const allUsers = await getUsersByName(userName);
         setUsers(allUsers);

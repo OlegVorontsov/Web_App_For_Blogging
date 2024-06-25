@@ -39,7 +39,7 @@ const UserProfile = () => {
           title = 'Edit' />
           <button className="btn btn-secondary" onClick={() => exitFromProfile()}>Sign out</button>
       </div>
-      <UserView user = {user} />
+      <UserView user = {user} isProfile={true} />
     </div>
   );
 };
