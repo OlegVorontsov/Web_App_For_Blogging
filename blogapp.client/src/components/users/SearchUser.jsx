@@ -4,12 +4,12 @@ import ImageComponent from '../ImageComponent';
 import { LOGIN_URL, isUserOnline } from "../../services/commonService";
 
 const SearchUser = () => {
-
+    const [userName, setUserName] = useState([]);
     const [users, setUsers] = useState([]);
 
     if(!isUserOnline()) window.location.href = LOGIN_URL;
 
-    const getUsers = async (userName) => {
+    const getUsers = async () => {
         if(userName === '') return;
         const allUsers = await getUsersByName(userName);
         setUsers(allUsers);

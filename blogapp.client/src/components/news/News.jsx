@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ImageComponent from "../ImageComponent"
-import { deleteNews, getNewsByUser, updateNews } from "../../services/newsService";
+import { deleteNews, getNews, getNewsByUser, updateNews } from "../../services/newsService";
 import ModalButton from "../ModalButton";
 import NewsCreate from "./NewsCreate";
 

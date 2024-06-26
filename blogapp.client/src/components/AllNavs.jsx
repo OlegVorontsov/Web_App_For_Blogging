@@ -1,43 +1,33 @@
 import { ALLNEWS_URL, ALLUSERS_URL, HOME_URL, LOGIN_URL, PROFILE_URL, isUserOnline } from "../services/commonService";
-import { NavItem } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { Nav, NavDropdown } from 'react-bootstrap';
+import { exitFromProfile } from "../services/usersService";
 
 
 const AllNavs = () => {
     let navs = [
-    <NavItem>
-        <NavLink className="nav-link" to={HOME_URL}>Home</NavLink>
-    </NavItem>
+        <Nav.Link href={HOME_URL}>Home</Nav.Link>
     ];
 
     if(isUserOnline()){
         navs.push(
-            <NavItem className="nav-item">
-                <NavLink className="nav-link" to={ALLNEWS_URL}>Wall</NavLink>
-            </NavItem>
+            <NavDropdown title="Menu" id="basic-nav-dropdown">
+                <NavDropdown.Item href={ALLNEWS_URL}>Wall</NavDropdown.Item>
+                <NavDropdown.Item href={PROFILE_URL}>Profile</NavDropdown.Item>
+                <NavDropdown.Item href={ALLUSERS_URL}>Search</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item style={{color: 'red'}} href="#" onClick={() => exitFromProfile()}>Sign out</NavDropdown.Item>
+            </NavDropdown>
         );
-        navs.push(
-        <NavItem className="nav-item">
-            <NavLink className="nav-link" to={PROFILE_URL}>Profile</NavLink>
-        </NavItem>
-        );
-        navs.push(
-            <NavItem className="nav-item">
-                <NavLink className="nav-link" to={ALLUSERS_URL}>Search</NavLink>
-            </NavItem>
-        )
     }
     else {
         navs.push(
-        <NavItem className="nav-item">
-            <NavLink className="nav-link" to={LOGIN_URL}>Login</NavLink>
-        </NavItem>
+            <Nav.Link href={LOGIN_URL}>Login</Nav.Link>
         )
     }
     return (
-        <ul className="navbar-nav ms-auto">
+        <Nav className="mr-auto">
             {navs}
-          </ul>
+        </Nav>
     )
 }
 export default AllNavs;
