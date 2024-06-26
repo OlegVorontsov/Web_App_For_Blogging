@@ -1,3 +1,4 @@
+import { Button } from "react-bootstrap"
 import { LOGIN_URL } from "../../services/commonService"
 import { createUser } from "../../services/usersService"
 import UserProfileCreate from "./UserProfileCreate"
@@ -23,9 +24,10 @@ const SignUp = () => {
     }
 
     return (
-        <div>
-            <UserProfileCreate user = {userDefault} setAction={signUpAction} />
-            <button className="btn btn-link" onClick={toLoginPage}>Sign in</button>
+        <div style={{ maxWidth: '40%',
+            marginLeft: 'auto',
+            marginRight: 'auto' }}>
+                <UserProfileCreate user = {userDefault} setAction={signUpAction} />
         </div>
 
     )

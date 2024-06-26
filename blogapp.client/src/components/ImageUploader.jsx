@@ -19,8 +19,8 @@ const ImageUploader = ({byteImageAction}) => {
   };
 
   return (
-    <div>
-      <h2>Загрузка изображения</h2>
+    <div className='mb-4'>
+      <p>Загрузка изображения</p>
       <input type="file" accept="image/*" onChange={handleFileChange} />
     </div>
   );

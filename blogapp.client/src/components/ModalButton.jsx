@@ -11,16 +11,14 @@ const ModalButton = ({ modalContent, title, btnName }) => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleOpenModal}>
-        {btnName}
-      </Button>
+      <Button variant="outline-primary" onClick={handleOpenModal}>{btnName}</Button>
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{modalContent}</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
+          <Button variant="outline-secondary" onClick={handleCloseModal}>Close</Button>
         </Modal.Footer>
       </Modal>
     </>

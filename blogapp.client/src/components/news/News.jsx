@@ -3,6 +3,7 @@ import ImageComponent from "../ImageComponent"
 import { deleteNews, getNews, getNewsByUser, updateNews } from "../../services/newsService";
 import ModalButton from "../ModalButton";
 import NewsCreate from "./NewsCreate";
+import { Button } from "react-bootstrap";
 
 // один пост
 export const News = ({id, text, imgStr, date, updateAction}) => {
@@ -27,7 +28,7 @@ export const News = ({id, text, imgStr, date, updateAction}) => {
                     oldImg={imgStr}
                     setAction = {updateNewsView}/>}
                 title = 'Edit post' />
-                <button className="btn btn-danger" onClick={() => deleteNewsView()}>Delete post</button>
+                <Button variant="outline-danger" onClick={() => deleteNewsView()}>Delete post</Button>
             </div>
             <NewsView date={date} text={text} imgStr={imgStr}/>
         </div>

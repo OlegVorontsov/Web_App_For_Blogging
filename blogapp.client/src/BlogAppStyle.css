@@ -1,0 +1,31 @@
+body {
+    margin: 0 auto !important;
+}
+
+img {
+    width: 100%;
+}
+
+/* resets */
+
+p {
+    margin-bottom: 0.5rem !important;
+}
+
+.news-item {
+    background-color: #006ce81a;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #0365d630;
+    border-radius: 5px;
+}
+
+.user-short {
+    display: flex;
+    cursor: pointer;
+}
+
+.user-short-img {
+    width: 20%;
+    margin-right: 20px;
+}

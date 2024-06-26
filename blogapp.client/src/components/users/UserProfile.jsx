@@ -3,6 +3,7 @@ import { GetUser, exitFromProfile, updateUser } from '../../services/usersServic
 import ModalButton from '../ModalButton';
 import UserProfileCreate from './UserProfileCreate';
 import UserView from './UserView';
+import { Button } from 'react-bootstrap';
 
 const UserProfile = () => {
   // Состояние для хранения данных пользователя
@@ -31,15 +32,16 @@ const UserProfile = () => {
 
   // Рендеринг компонента с данными пользователя
   return (
-    <div style={{textAlign: 'left'}}>
+    <div>
       <div style={{display: 'flex', gap: '10px', justifyContent: 'flex-end'}}>
         <ModalButton
+         variant="outline-primary"
           btnName={'Edit'}
           modalContent = {<UserProfileCreate user={user} setAction = {updateUserView}/>}
           title = 'Edit' />
-          <button className="btn btn-secondary" onClick={() => exitFromProfile()}>Sign out</button>
+          <Button variant="outline-danger" onClick={() => exitFromProfile()}>Sign out</Button>
       </div>
-      <UserView user = {user} isProfile={true} />
+        <UserView user = {user} isProfile={true} />
     </div>
   );
 };

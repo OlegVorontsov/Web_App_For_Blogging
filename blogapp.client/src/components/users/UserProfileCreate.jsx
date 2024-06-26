@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ImageComponent from '../ImageComponent';
 import ImageUploader from '../ImageUploader';
+import { Button, Form } from "react-bootstrap";
 
 const UserProfileCreate = ({user, setAction}) => {
   // Состояние для хранения данных пользователя
@@ -29,19 +30,39 @@ const UserProfileCreate = ({user, setAction}) => {
 
   // Рендеринг компонента с данными пользователя
   return (
-    <div style ={{display: 'flex', flexDirection: 'column'}}>
-      <h2>User Profile</h2>
+    <div style ={{display: 'flex', flexDirection: 'column' }}>
       <p>Name</p>
-      <input type='text' defaultValue={userName} onChange={e => setUserName(e.target.value)} />
+      <Form.Control
+                className="mb-2"
+                type="text"
+                placeholder="Enter name"
+                defaultValue={userName}
+                onChange={e => setUserName(e.target.value)} />
       <p>Email</p>
-      <input type='email' defaultValue={userEmail} onChange={e => setUserEmail(e.target.value)} />
+      <Form.Control
+                className="mb-2"
+                type="email"
+                placeholder="Enter email"
+                defaultValue={userEmail}
+                onChange={e => setUserEmail(e.target.value)} />
       <p>Password</p>
-      <input type='password' defaultValue={userPassword} onChange={e => setUserPassword(e.target.value)} />
+      <Form.Control
+                className="mb-2"
+                type="password"
+                placeholder="Enter email"
+                defaultValue={userPassword}
+                onChange={e => setUserPassword(e.target.value)} />
       <p>Description</p>
-      <textarea defaultValue={userDescription} onChange={e => setUserDescription(e.target.value)} />
-      {img}
+      <Form.Control as="textarea" rows={3}
+                className="mb-2"
+                placeholder="Enter description"
+                defaultValue={userDescription}
+                onChange={e => setUserDescription(e.target.value)} />
+      <div style ={{ maxWidth: '100%' }}>
+        {img}
+      </div>
       <ImageUploader byteImageAction={(str, bytes) => {setUserPhoto(bytes); setUserPhotoStr(str)}} />
-      <button onClick={endCreate}>Ok</button>
+      <Button variant="outline-primary" className="mr-2" onClick={endCreate}>Ok</Button>
     </div>
   );
 };
