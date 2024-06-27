@@ -16,7 +16,7 @@ const UserView = ({user, isProfile}) => {
       <div style={{textAlign: 'left'}}>
         <h3>{user.name}</h3>
         <div style={{display: 'flex', marginBottom: '10px'}}>
-          <div style={{width: '40%', marginRight: '20px'}}>
+          <div className='user-img'>
             <ImageComponent base64String={user.photo} />
           </div>
           <div className='user-data'>
@@ -27,13 +27,17 @@ const UserView = ({user, isProfile}) => {
 
       { isProfile ? 
       <div>
-        <div style={{textAlign: 'right', marginBottom: '10px'}}>
+        <div style={{textAlign: 'right', marginRight: '10px', marginBottom: '10px'}}>
           <ModalButton
             btnName={'Add post'}
-            modalContent = {<NewsCreate id={0} oldText={''} oldImg={''} setAction = {addNewNews}/>}
+            modalContent = {<NewsCreate
+                            id={0}
+                            oldText={''}
+                            oldImg={''}
+                            setAction = {addNewNews}/>}
             title = 'New post' />
         </div>
-        <NewsProfileView userId={user.id} />
+          <NewsProfileView userId={user.id} />
       </div> : 
           <NewsByUser userId={user.id} />}
       </div>  

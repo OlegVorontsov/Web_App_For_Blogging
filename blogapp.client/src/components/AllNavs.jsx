@@ -11,8 +11,8 @@ const AllNavs = () => {
     if(isUserOnline()){
         navs.push(
             <NavDropdown title="Menu" id="basic-nav-dropdown">
-                <NavDropdown.Item href={ALLNEWS_URL}>Wall</NavDropdown.Item>
                 <NavDropdown.Item href={PROFILE_URL}>Profile</NavDropdown.Item>
+                <NavDropdown.Item href={ALLNEWS_URL}>Wall</NavDropdown.Item>
                 <NavDropdown.Item href={ALLUSERS_URL}>Search</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item style={{color: 'red'}} href="#" onClick={() => exitFromProfile()}>Sign out</NavDropdown.Item>

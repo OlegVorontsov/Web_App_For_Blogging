@@ -1,9 +1,9 @@
+import ImageComponent from "../ImageComponent";
 import { useEffect, useState } from "react";
-import ImageComponent from "../ImageComponent"
 import { deleteNews, getNews, getNewsByUser, updateNews } from "../../services/newsService";
+import { Button } from "react-bootstrap";
 import ModalButton from "../ModalButton";
 import NewsCreate from "./NewsCreate";
-import { Button } from "react-bootstrap";
 
 // один пост
 export const News = ({id, text, imgStr, date, updateAction}) => {
@@ -23,22 +23,24 @@ export const News = ({id, text, imgStr, date, updateAction}) => {
             <div style ={{display: 'flex', gap: '20px', justifyContent: 'flex-end'}}>
                 <ModalButton
                 btnName={'Edit post'}
-                modalContent = {<NewsCreate id={id}
-                    oldText={text}
-                    oldImg={imgStr}
-                    setAction = {updateNewsView}/>}
+                modalContent = {<NewsCreate
+                                id={id}
+                                oldText={text}
+                                oldImg={imgStr}
+                                setAction = {updateNewsView}/>}
                 title = 'Edit post' />
                 <Button variant="outline-danger" onClick={() => deleteNewsView()}>Delete post</Button>
             </div>
-            <NewsView date={date} text={text} imgStr={imgStr}/>
+            <NewsView id={id} date={date} text={text} imgStr={imgStr}/>
         </div>
     )
 }
 
+//работает
 const NewsView = ({date, text, imgStr}) => {
     return (
-        <div>
-            <div className="img-box">
+        <div style={{display: 'flex', gap: '20px'}}>
+            <div style={{maxWidth: '350px', borderRadius: '5px', overflow: 'hidden'}}>
                 <ImageComponent base64String={imgStr}/>
             </div>
             <div>
@@ -46,8 +48,9 @@ const NewsView = ({date, text, imgStr}) => {
                 <p>{text}</p>
             </div>
         </div>)
-        }
+}
 
+//работает
 export const NewsProfileView = ({userId}) => {
     const [news, setNews] = useState([]);
 
@@ -68,7 +71,7 @@ export const NewsProfileView = ({userId}) => {
                     id = {el.id}
                     text = {el.text} 
                     imgStr={el.img} 
-                    date={el.postDate}
+                    date={el.normalDate}
                     updateAction={getAllNews}
                 />
             })}
@@ -124,3 +127,4 @@ export const NewsForUser = () => {
         </div>
     )
 }
+

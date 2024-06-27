@@ -114,6 +114,7 @@ namespace BlogApp.Server.Services
                 Text = news.Text,
                 Img = news.Img,
                 PostDate = news.PostDate,
+                NormalDate = $"{news.PostDate:f}",
                 LikesCount = likes?.UserIds.Count ?? 0
             };
             return newsModel;

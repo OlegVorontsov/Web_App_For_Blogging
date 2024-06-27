@@ -38,10 +38,12 @@ const UserProfile = () => {
          variant="outline-primary"
           btnName={'Edit'}
           modalContent = {<UserProfileCreate user={user} setAction = {updateUserView}/>}
-          title = 'Edit' />
-          <Button variant="outline-danger" onClick={() => exitFromProfile()}>Sign out</Button>
+          title = 'Edit profile' />
+          <Button style={{marginRight: '10px'}}
+                  variant="outline-danger"
+                  onClick={() => exitFromProfile()}>Sign out</Button>
       </div>
-        <UserView user = {user} isProfile={true} />
+        <UserView user = {user} isProfile = {true} />
     </div>
   );
 };

@@ -7,5 +7,6 @@
         public object Img { get; set; }
         public int? LikesCount { get; set; }
         public DateTime PostDate { get; set; }
+        public string NormalDate { get; set; }
     }
 }

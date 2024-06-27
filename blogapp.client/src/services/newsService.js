@@ -16,10 +16,10 @@ export async function createNews(newNews) {
     return news;
 }
 
-export async function updateNews(newNews) {
-    newNews.img = newNews.img.toString();
-    const news = await sendRequestWithToken(NEWS_URL, 'PATCH', newNews);
-    return news;
+export async function updateNews(news) {
+    news.img = news.img.toString();
+    const newsUpdated = await sendRequestWithToken(NEWS_URL, 'PATCH', news);
+    return newsUpdated;
 }
 
 export async function deleteNews(newsId) {
