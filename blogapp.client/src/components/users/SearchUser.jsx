@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getUsersByName } from "../../services/usersService";
 import ImageComponent from '../ImageComponent';
 import { LOGIN_URL, isUserOnline } from "../../services/commonService";
+import { Button, Form } from "react-bootstrap";
 
 const SearchUser = () => {
     const [userName, setUserName] = useState([]);
@@ -16,14 +17,28 @@ const SearchUser = () => {
     }
 
     return (
-        <div style={{textAlign: 'left'}}>
-            <input style={{marginRight: '20px', marginBottom: '20px'}}
-                type="text" defaultValue='' onChange={e => setUserName(e.target.value)}></input>
-            <button className="btn btn-primary" onClick={getUsers}>Search</button>
-            {users.length !== 0 ? 
-            users.map((el, key) => {
-                return <ShortUserView key={key} id = {el.id} name = {el.name} description = {el.description} photo = {el.photo}/>
-            }) : <p>No such users</p>}
+        <div>
+            <div style={{ display: 'flex',
+                        gap: '10px',
+                        marginBottom: '20px'}}>
+                <Form.Control
+                    type="text"
+                    placeholder="Enter user name"
+                    defaultValue=''
+                    onChange={e => setUserName(e.target.value)} />
+                <Button variant="outline-primary" onClick={getUsers}>Search</Button>
+            </div>
+            <div style={{display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
+                {users.length !== 0 ? 
+                users.map((el, key) => {
+                    return <ShortUserView
+                            key={key}
+                            id = {el.id}
+                            name = {el.name}
+                            description = {el.description}
+                            photo = {el.photo}/>
+                }) : <p style={{marginLeft: '12px'}}>No such users</p>}
+            </div>
         </div>
     );
 }
@@ -40,8 +55,7 @@ const ShortUserView = ({id, name, description, photo }) => {
         <div className="user-short-img">
             <ImageComponent base64String={photo} />
         </div>
-        <div className="user-short-data">
-            <p>{id}</p>
+        <div>
             <p>{name}</p>
             <p>{description}</p>
         </div>

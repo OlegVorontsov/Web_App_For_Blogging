@@ -108,11 +108,12 @@ namespace BlogApp.Server.Services
         public List<UserShortModel> GetUsersByName(string name)
         {
             string nameLower = name.ToLower();
-            return _dataContext.Users
+            var users = _dataContext.Users
                                .Where(u => u.Name.ToLower()
-                               .StartsWith(nameLower))
+                               .Contains(nameLower))
                                .Select(ToShortModel)
                                .ToList();
+            return users;
         }
         public void DeleteUser(User user)
         {

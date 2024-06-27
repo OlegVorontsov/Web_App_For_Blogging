@@ -19,7 +19,7 @@ const UserView = ({user, isProfile}) => {
           <div className='user-img'>
             <ImageComponent base64String={user.photo} />
           </div>
-          <div className='user-data'>
+          <div>
             <p>{user.email}</p>
             <p>{user.description}</p>
           </div>
