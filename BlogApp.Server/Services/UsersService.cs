@@ -115,6 +115,12 @@ namespace BlogApp.Server.Services
                                .ToList();
             return users;
         }
+        public List<UserShortModel> GetAllUsers()
+        {
+            return _dataContext.Users
+                               .Select(ToShortModel)
+                               .ToList();
+        }
         public void DeleteUser(User user)
         {
             _dataContext.Users.Remove(user);
@@ -128,17 +134,6 @@ namespace BlogApp.Server.Services
         {
             return password1 == password2;
         }
-        //private UserModel ToModel(User user)
-        //{
-        //    return new UserModel
-        //    {
-        //        Id = user.Id,
-        //        Name = user.Name,
-        //        Email = user.Email,
-        //        Description = user.Description,
-        //        Photo = user.GetPhoto()
-        //    };
-        //}
         public UserProfileModel ToProfileModel(User user)
         {
             var userSubs = _noSQLDataService.GetUserSub(user.Id);

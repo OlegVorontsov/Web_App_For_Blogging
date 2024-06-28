@@ -37,7 +37,22 @@ p {
     overflow: hidden;
 }
 
-.news-item {
+.news-btns {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    padding: 10px;
+    background-color: #006ce81a;
+    border-left: 1px solid #0365d630;
+    border-right: 1px solid #0365d630;
+    border-top: 1px solid #0365d630;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.news-view-item {
+    display: flex;
+    gap: 20px;
     background-color: #006ce81a;
     margin-bottom: 10px;
     padding: 10px;
@@ -49,6 +64,7 @@ p {
     display: flex;
     cursor: pointer;
     width: 360px;
+    height: 180px;
     background-color: #006ce81a;
     padding: 10px;
     border: 1px solid #0365d630;
@@ -61,7 +77,7 @@ p {
 }
 
 .user-short-img {
-    width: 40%;
+    height: 100%;
     margin-right: 20px;
     border-radius: 5px;
     overflow: hidden;
@@ -71,3 +87,32 @@ p {
     height: 100%;
     object-fit: cover;
 }
+
+.circle-effect-btn {
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.ripple {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: white;
+    pointer-events: none;
+    opacity: .5;
+    animation: ripple .3s linear;
+}
+
+@keyframes ripple {
+    to {
+        width: 15rem;
+        height: 15rem;
+        opacity: 0;
+    }
+}
+

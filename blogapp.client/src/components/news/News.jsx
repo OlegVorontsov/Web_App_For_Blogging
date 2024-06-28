@@ -6,7 +6,7 @@ import ModalButton from "../ModalButton";
 import NewsCreate from "./NewsCreate";
 
 // один пост
-export const News = ({id, text, imgStr, date, updateAction}) => {
+export const News = ({id, text, imgStr, date, isProfile, updateAction}) => {
 
     const updateNewsView = async (news) => {
         await updateNews(news);
@@ -19,19 +19,26 @@ export const News = ({id, text, imgStr, date, updateAction}) => {
     };
 
     return (
-        <div className='news-item'>
-            <div style ={{display: 'flex', gap: '20px', justifyContent: 'flex-end'}}>
+        <div>
+            { isProfile ? 
+            <div className="news-btns">
                 <ModalButton
                 btnName={'Edit post'}
-                modalContent = {<NewsCreate
-                                id={id}
-                                oldText={text}
-                                oldImg={imgStr}
-                                setAction = {updateNewsView}/>}
+                    modalContent = {<NewsCreate
+                            id={id}
+                            oldText={text}
+                            oldImg={imgStr}
+                            setAction = {updateNewsView}/>}
                 title = 'Edit post' />
-                <Button variant="outline-danger" onClick={() => deleteNewsView()}>Delete post</Button>
-            </div>
-            <NewsView id={id} date={date} text={text} imgStr={imgStr}/>
+            <Button variant="outline-danger" onClick={() => deleteNewsView()}>Delete post</Button>
+            <NewsView id={id} date={date} text={text} imgStr={imgStr} />
+        </div> :
+<div>
+    <NewsView id={id} date={date} text={text} imgStr={imgStr} />
+</div>
+        }
+            
+
         </div>
     )
 }
@@ -39,19 +46,20 @@ export const News = ({id, text, imgStr, date, updateAction}) => {
 //работает
 const NewsView = ({date, text, imgStr}) => {
     return (
-        <div style={{display: 'flex', gap: '20px'}}>
-            <div style={{maxWidth: '350px', borderRadius: '5px', overflow: 'hidden'}}>
-                <ImageComponent base64String={imgStr}/>
-            </div>
-            <div>
-                <p>{date}</p>
-                <p>{text}</p>
-            </div>
-        </div>)
+    <div className="news-view-item">
+        <div style={{maxWidth: '350px', borderRadius: '5px', overflow: 'hidden'}}>
+            <ImageComponent base64String={imgStr}/>
+        </div>
+        <div>
+            <p>{date}</p>
+            <p>{text}</p>
+        </div>
+    </div>
+)
 }
 
 //работает
-export const NewsProfileView = ({userId}) => {
+export const NewsProfileView = ({userId, isProfile}) => {
     const [news, setNews] = useState([]);
 
     const getAllNews = async () => {
@@ -72,6 +80,7 @@ export const NewsProfileView = ({userId}) => {
                     text = {el.text} 
                     imgStr={el.img} 
                     date={el.normalDate}
+                    isProfile={isProfile}
                     updateAction={getAllNews}
                 />
             })}
@@ -79,7 +88,7 @@ export const NewsProfileView = ({userId}) => {
     )
 }
 
-export const NewsByUser = ({userId}) => {
+{/*export const NewsByUser = ({userId}) => {
 
     const [news, setNews] = useState([]);
 
@@ -98,11 +107,11 @@ export const NewsByUser = ({userId}) => {
                 return <NewsView key={key}
                 text = {el.text}
                 imgStr={el.img}
-                date = {el.postDate}/>
+                date = {el.normalDate}/>
             })}
         </div>
     )
-}
+}*/}
 
 export const NewsForUser = () => {
     const [news, setNews] = useState([]);

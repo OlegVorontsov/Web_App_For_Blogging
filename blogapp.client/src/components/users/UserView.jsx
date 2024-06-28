@@ -1,5 +1,5 @@
 import ImageComponent from '../ImageComponent';
-import { NewsByUser, NewsProfileView } from '../news/News';
+import { NewsProfileView } from '../news/News';
 import ModalButton from '../ModalButton';
 import NewsCreate from '../news/NewsCreate';
 import { createNews } from '../../services/newsService';
@@ -37,9 +37,11 @@ const UserView = ({user, isProfile}) => {
                             setAction = {addNewNews}/>}
             title = 'New post' />
         </div>
-          <NewsProfileView userId={user.id} />
+          <NewsProfileView userId={user.id} isProfile={isProfile} />
       </div> : 
-          <NewsByUser userId={user.id} />}
+          <div>
+            <NewsProfileView userId={user.id} isProfile={isProfile} />
+            </div>}
       </div>  
     )
 }

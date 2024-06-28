@@ -20,6 +20,12 @@ namespace BlogApp.Server.Controllers
         {
             return Ok(_userService.GetUsersByName(name));
         }
+        [HttpGet("all")]
+        [AllowAnonymous]
+        public IActionResult GetAllUsers()
+        {
+            return Ok(_userService.GetAllUsers());
+        }
         [HttpPost("subs/{userId}")]
         public IActionResult Subscribe(int userId)
         {

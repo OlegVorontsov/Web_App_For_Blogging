@@ -4,6 +4,7 @@ import ImageComponent from '../ImageComponent';
 import { LOGIN_URL, isUserOnline } from "../../services/commonService";
 import { Button, Form } from "react-bootstrap";
 
+
 const SearchUser = () => {
     const [userName, setUserName] = useState([]);
     const [users, setUsers] = useState([]);
@@ -20,7 +21,7 @@ const SearchUser = () => {
         <div>
             <div style={{ display: 'flex',
                         gap: '10px',
-                        marginBottom: '20px'}}>
+                        marginBottom: '10px'}}>
                 <Form.Control
                     type="text"
                     placeholder="Enter user name"
@@ -44,21 +45,39 @@ const SearchUser = () => {
 }
 export default SearchUser;
 
-const ShortUserView = ({id, name, description, photo }) => {
+export const ShortUserView = ({id, name, description, photo }) => {
+
+    const createRipple = (e) => {
+        let btn = e.target;
+        let boundingBox = btn.getBoundingClientRect();
+        let x = e.clientX - boundingBox.left;
+        let y = e.clientY - boundingBox.top;
+    
+        let ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+    
+        btn.appendChild(ripple);
+    
+        ripple.addEventListener('animationend', () => { ripple.remove() });
+    }
 
     const userClick = (userId) => {
-    window.location.href = `/${userId}`;
+        setTimeout(() => {window.location.href = `/${userId}`}, 300);
     }
 
     return (
-    <div className="user-short" onClick={() => userClick(id)}>
+    <div onClick={() => userClick(id)}>
+        <button className="user-short circle-effect-btn" onClick={createRipple}>
         <div className="user-short-img">
             <ImageComponent base64String={photo} />
         </div>
-        <div>
-            <p>{name}</p>
-            <p>{description}</p>
-        </div>
+            <div style={{textAlign: 'left'}}>
+                <p>{name}</p>
+                <p>{description}</p>
+            </div>
+        </button>
     </div>
     )
 }
