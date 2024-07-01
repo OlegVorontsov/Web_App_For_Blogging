@@ -37,11 +37,11 @@ const UserView = ({user, isProfile}) => {
                             setAction = {addNewNews}/>}
             title = 'New post' />
         </div>
-          <NewsProfileView userId={user.id} isProfile={isProfile} />
+        <NewsProfileView userId={user.id} isProfile={isProfile} />
       </div> : 
           <div>
             <NewsProfileView userId={user.id} isProfile={isProfile} />
-            </div>}
+          </div>}
       </div>  
     )
 }
