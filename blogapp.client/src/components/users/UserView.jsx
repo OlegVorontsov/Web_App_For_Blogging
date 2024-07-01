@@ -4,6 +4,7 @@ import ModalButton from '../ModalButton';
 import NewsCreate from '../news/NewsCreate';
 import { createNews } from '../../services/newsService';
 import { PROFILE_URL } from '../../services/commonService';
+import { UserSubsView } from './UserSubsView';
 
 const UserView = ({user, isProfile}) => {
 
@@ -15,13 +16,19 @@ const UserView = ({user, isProfile}) => {
     return (
       <div style={{textAlign: 'left'}}>
         <h3>{user.name}</h3>
-        <div style={{display: 'flex', marginBottom: '10px'}}>
+        <div style={{display: 'flex', gap: '20px', marginBottom: '10px'}}>
           <div className='user-img'>
             <ImageComponent base64String={user.photo} />
           </div>
           <div>
             <p>{user.email}</p>
             <p>{user.description}</p>
+            { isProfile ? 
+              <UserSubsView userId={user.id}/> :
+            <div>
+              <h5>You're subscribed to:</h5>
+            </div>
+            }
           </div>
       </div>
 

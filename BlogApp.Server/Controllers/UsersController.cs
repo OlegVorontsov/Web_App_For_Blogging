@@ -38,6 +38,12 @@ namespace BlogApp.Server.Controllers
             else return BadRequest();
             return Ok();
         }
+        [HttpGet("allsubs/{userId}")]
+        public IActionResult GetUserSubs(int userId)
+        {
+            var users = _userService.GetUserSubsById(userId);
+            return Ok(users);
+        }
         [HttpGet("{userId}")]
         public IActionResult Get(int userId)
         {

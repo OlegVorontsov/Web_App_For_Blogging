@@ -105,10 +105,14 @@ export const NewsForUser = () => {
     return (
         <div>
             {news.map((el, key) => {
-                return <NewsView key={key}
-                    date={el.postDate}
-                    text={el.text}
-                    imgStr={el.img}/>
+                return (
+                    <div className="news-view-item">
+                        <NewsView key={key}
+                                date={el.normalDate}
+                                text={el.text}
+                                imgStr={el.img}/>
+                    </div>
+                )
             })}
         </div>
     )

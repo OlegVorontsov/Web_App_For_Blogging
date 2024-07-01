@@ -32,7 +32,7 @@ const UserProfile = () => {
 
   // Рендеринг компонента с данными пользователя
   return (
-    <div>
+    <div className='user-profile'>
       <div style={{display: 'flex', gap: '10px', justifyContent: 'flex-end'}}>
         <ModalButton
          variant="outline-primary"

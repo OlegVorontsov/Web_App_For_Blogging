@@ -46,3 +46,12 @@ export async function subscribeToUser(userId){
     await sendRequestWithToken(USERS_URL + `/subs/${userId}`, 'POST');
 }
 
+export async function getUserSubs(userId){
+    const users = await sendRequestWithToken(USERS_URL + `/allsubs/${userId}`, 'GET');
+    return users;
+}
+
+export async function deleteSub(userId){
+    //await sendRequestWithToken(USERS_URL + `/subs/${userId}`, 'POST');
+}
+

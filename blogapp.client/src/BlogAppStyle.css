@@ -30,9 +30,13 @@ p {
     scale: 1.2;
 }
 
+.user-profile {
+    text-align: left;
+    background-color: #67676730;
+}
+
 .user-img {
     width: 40%;
-    margin-right: 20px;
     border-radius: 5px;
     overflow: hidden;
 }
@@ -99,5 +103,13 @@ p {
         height: 15rem;
         opacity: 0;
     }
+}
+
+.user-sub-item {
+    width: 350px;
+    background-color: #00e80f1a;
+    padding: 10px;
+    border: 1px solid #03d61530;
+    border-radius: 5px;
 }
 

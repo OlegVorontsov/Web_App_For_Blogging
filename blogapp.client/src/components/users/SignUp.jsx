@@ -1,4 +1,3 @@
-import { Button } from "react-bootstrap"
 import { LOGIN_URL } from "../../services/commonService"
 import { createUser } from "../../services/usersService"
 import UserProfileCreate from "./UserProfileCreate"

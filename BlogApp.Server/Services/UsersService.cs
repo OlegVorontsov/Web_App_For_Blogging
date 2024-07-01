@@ -1,5 +1,7 @@
 ﻿using BlogApp.Server.Data;
 using BlogApp.Server.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text;
 
@@ -129,6 +131,17 @@ namespace BlogApp.Server.Services
         public void Subscribe(int from, int to)
         {
             _noSQLDataService.SetUserSub(from, to);
+        }
+        public List<UserShortModel> GetUserSubsById(int userId)
+        {
+            var userSubs = _noSQLDataService.GetUserSub(userId);
+            var users = new List<UserShortModel>();
+            foreach (var sub in userSubs.UserSubsList)
+            {
+                var user = _dataContext.Users.FirstOrDefault(u => u.Id == sub.Id);
+                if (user != null) users.Add(ToShortModel(user));
+            }
+            return users;
         }
         private bool VerifyHashedPassword(string password1, string password2)
         {
