@@ -10,8 +10,12 @@ export const UserSub = ({id, name, photo, updateAction}) => {
         updateAction();
     };
 
+    const userClick = (userId) => {
+        setTimeout(() => {window.location.href = `/${userId}`}, 300);
+    }
+
     return (
-        <div className="user-sub-item">
+        <div onClick={() => userClick(id)} className="user-sub-item">
             <div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: '10px'}}>
                 <Button variant="outline-danger" onClick={() => deleteSubView()}>Delete sub</Button>
             </div>
@@ -21,15 +25,18 @@ export const UserSub = ({id, name, photo, updateAction}) => {
 }
 
 const SubView = ({name, photo}) => {
+
     return (
-        <div style={{display: 'flex', gap: '20px'}}>
-            <div style={{maxWidth: '200px', borderRadius: '5px', overflow: 'hidden'}}>
-                <ImageComponent base64String={photo} />
+        <button style={{width: '100%', minHeight: '150px'}} className="circle-effect-btn" onClick={createRipple}>
+            <div style={{display: 'flex', gap: '20px'}}>
+                <div style={{maxWidth: '200px', borderRadius: '5px', overflow: 'hidden'}}>
+                    <ImageComponent base64String={photo} />
+                </div>
+                <div>
+                    <p>{name}</p>
+                </div>
             </div>
-            <div>
-                <p>{name}</p>
-            </div>
-        </div>
+        </button>
     )
 }
 
@@ -61,4 +68,20 @@ export const UserSubsView = ({userId}) => {
             </div>
         </div>
     )
+}
+
+const createRipple = (e) => {
+    let btn = e.target;
+    let boundingBox = btn.getBoundingClientRect();
+    let x = e.clientX - boundingBox.left;
+    let y = e.clientY - boundingBox.top;
+
+    let ripple = document.createElement('span');
+    ripple.classList.add('ripple');
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+
+    btn.appendChild(ripple);
+
+    ripple.addEventListener('animationend', () => { ripple.remove() });
 }

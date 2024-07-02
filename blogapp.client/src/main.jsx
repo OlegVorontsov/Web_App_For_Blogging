@@ -31,7 +31,7 @@ const App = () => {
     <Router>
       <div>
         <NavigationMenu />
-        <div className="container mt-4">
+        <div className="container mt-4 bg-light container-app">
           <Routes>
             {routes.map((route, index) => (
               <Route key={index} path={route.path} element={route.element} />

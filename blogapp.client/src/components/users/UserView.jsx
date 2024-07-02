@@ -25,9 +25,7 @@ const UserView = ({user, isProfile}) => {
             <p>{user.description}</p>
             { isProfile ? 
               <UserSubsView userId={user.id}/> :
-            <div>
-              <h5>You're subscribed to:</h5>
-            </div>
+            <div></div>
             }
           </div>
       </div>

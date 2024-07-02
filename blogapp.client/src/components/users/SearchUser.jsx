@@ -4,7 +4,6 @@ import ImageComponent from '../ImageComponent';
 import { LOGIN_URL, isUserOnline } from "../../services/commonService";
 import { Button, Form } from "react-bootstrap";
 
-
 const SearchUser = () => {
     const [userName, setUserName] = useState([]);
     const [users, setUsers] = useState([]);
@@ -47,22 +46,6 @@ export default SearchUser;
 
 export const ShortUserView = ({id, name, description, photo }) => {
 
-    const createRipple = (e) => {
-        let btn = e.target;
-        let boundingBox = btn.getBoundingClientRect();
-        let x = e.clientX - boundingBox.left;
-        let y = e.clientY - boundingBox.top;
-    
-        let ripple = document.createElement('span');
-        ripple.classList.add('ripple');
-        ripple.style.left = `${x}px`;
-        ripple.style.top = `${y}px`;
-    
-        btn.appendChild(ripple);
-    
-        ripple.addEventListener('animationend', () => { ripple.remove() });
-    }
-
     const userClick = (userId) => {
         setTimeout(() => {window.location.href = `/${userId}`}, 300);
     }
@@ -81,5 +64,24 @@ export const ShortUserView = ({id, name, description, photo }) => {
     </div>
     )
 }
+
+const createRipple = (e) => {
+    let btn = e.target;
+    let boundingBox = btn.getBoundingClientRect();
+    let x = e.clientX - boundingBox.left;
+    let y = e.clientY - boundingBox.top;
+
+    let ripple = document.createElement('span');
+    ripple.classList.add('ripple');
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+
+    btn.appendChild(ripple);
+
+    ripple.addEventListener('animationend', () => { ripple.remove() });
+}
+
+
+
 
 

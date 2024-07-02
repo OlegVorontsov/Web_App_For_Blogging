@@ -30,9 +30,14 @@ p {
     scale: 1.2;
 }
 
+.container-app {
+    padding: 10px 0 10px 0;
+    outline: 1px solid #e0e0e0a6;
+    border-radius: 5px;
+}
+
 .user-profile {
     text-align: left;
-    background-color: #67676730;
 }
 
 .user-img {
@@ -52,11 +57,11 @@ p {
 .user-short {
     display: flex;
     cursor: pointer;
+    box-shadow: 0 10px 10px 0 rgba(230, 235, 245, 0.4), 0 10px 10px 0 #e3ebfc;
     width: 360px;
     height: 180px;
     background-color: #006ce81a;
     padding: 10px;
-    border: 1px solid #0365d630;
     border-radius: 5px;
     transition: background-color .3s ease-in-out;
 }
@@ -78,6 +83,9 @@ p {
 }
 
 .circle-effect-btn {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
     position: relative;
     cursor: pointer;
     outline: none;
@@ -107,9 +115,15 @@ p {
 
 .user-sub-item {
     width: 350px;
-    background-color: #00e80f1a;
     padding: 10px;
-    border: 1px solid #03d61530;
+    box-shadow: 0 10px 10px 0 rgba(230, 245, 232, 0.4), 0 10px 10px 0 #e3fce9;
     border-radius: 5px;
+    transition: background-color .3s ease-in-out
 }
+
+.user-sub-item:hover {
+    background-color: #00e80f46;
+}
+
+
 
