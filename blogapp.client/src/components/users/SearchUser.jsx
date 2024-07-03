@@ -52,11 +52,11 @@ export const ShortUserView = ({id, name, description, photo }) => {
 
     return (
     <div onClick={() => userClick(id)}>
-        <button className="user-short circle-effect-btn" onClick={createRipple}>
+        <button className="user-short box-shadow-blue circle-effect-btn" onClick={createRipple}>
         <div className="user-short-img">
             <ImageComponent base64String={photo} />
         </div>
-            <div style={{textAlign: 'left'}}>
+            <div style={{maxWidth: '160px', textAlign: 'left'}}>
                 <p>{name}</p>
                 <p>{description}</p>
             </div>

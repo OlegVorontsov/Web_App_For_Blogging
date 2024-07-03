@@ -74,8 +74,13 @@ export async function sendRequestWithToken(url, method, data, withToken = true) 
 
     if(fetchResult.ok)
         {
-            const result = await fetchResult.json();
-            return result;
+            try{
+                const result = await fetchResult.json();
+                return result;
+            }
+            catch{
+                return;
+            }
         }
     else
         {

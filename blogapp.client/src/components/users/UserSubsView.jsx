@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
-import { getUserSubs } from "../../services/usersService";
+import { deleteSub, getUserSubs } from "../../services/usersService";
 import ImageComponent from "../ImageComponent";
 import { Button } from "react-bootstrap";
+import { PROFILE_URL } from "../../services/commonService";
 
-export const UserSub = ({id, name, photo, updateAction}) => {
+export const UserSub = ({id, name, photo}) => {
 
-    const deleteSubView = async () => {
-        await deleteSub(id);
-        updateAction();
+    const deleteSubView = async (userId) => {
+        await deleteSub(userId);
+        window.location.href = PROFILE_URL;
     };
 
     const userClick = (userId) => {
@@ -15,11 +16,13 @@ export const UserSub = ({id, name, photo, updateAction}) => {
     }
 
     return (
-        <div onClick={() => userClick(id)} className="user-sub-item">
+        <div className="user-sub-item box-shadow-green">
             <div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: '10px'}}>
-                <Button variant="outline-danger" onClick={() => deleteSubView()}>Delete sub</Button>
+                <Button variant="outline-danger" onClick={() => deleteSubView(id)}>Delete sub</Button>
             </div>
-            <SubView id={id} name={name} photo={photo} />
+            <div onClick={() => userClick(id)} >
+                <SubView name={name} photo={photo} />
+            </div>
         </div>
     )
 }
@@ -29,7 +32,7 @@ const SubView = ({name, photo}) => {
     return (
         <button style={{width: '100%', minHeight: '150px'}} className="circle-effect-btn" onClick={createRipple}>
             <div style={{display: 'flex', gap: '20px'}}>
-                <div style={{maxWidth: '200px', borderRadius: '5px', overflow: 'hidden'}}>
+                <div className="sub-img">
                     <ImageComponent base64String={photo} />
                 </div>
                 <div>
@@ -56,13 +59,12 @@ export const UserSubsView = ({userId}) => {
     return (
         <div>
             <h5>You're subscribed to:</h5>
-            <div style={{display: 'flex', gap: '10px'}}>
+            <div style={{display: 'flex', gap: '10px', justifyContent: 'flex-end', flexWrap: 'wrap'}}>
             {users.map((el, key) => {
                 return <UserSub key={key} 
                     id = {el.id}
                     name = {el.name} 
                     photo = {el.photo}
-                    updateAction={getAllUserSubs}
                 />
             })}
             </div>

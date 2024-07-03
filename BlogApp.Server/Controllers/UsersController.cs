@@ -38,6 +38,17 @@ namespace BlogApp.Server.Controllers
             else return BadRequest();
             return Ok();
         }
+        [HttpDelete("{userId}")]
+        public IActionResult DeleteSub(int userId)
+        {
+            var currentUser = _userService.GetUserByLogin(HttpContext.User.Identity.Name);
+            if (currentUser == null)
+            {
+                return NotFound();
+            }
+            _userService.DeleteSub(from: currentUser.Id, to: userId);
+            return Ok();
+        }
         [HttpGet("allsubs/{userId}")]
         public IActionResult GetUserSubs(int userId)
         {

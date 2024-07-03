@@ -52,6 +52,7 @@ export async function getUserSubs(userId){
 }
 
 export async function deleteSub(userId){
-    //await sendRequestWithToken(USERS_URL + `/subs/${userId}`, 'POST');
+    const subs = await sendRequestWithToken(USERS_URL + `/${userId}`, 'DELETE');
+    return subs;
 }
 

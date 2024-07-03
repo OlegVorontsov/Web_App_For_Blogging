@@ -132,6 +132,10 @@ namespace BlogApp.Server.Services
         {
             _noSQLDataService.SetUserSub(from, to);
         }
+        public void DeleteSub(int from, int to)
+        {
+            _noSQLDataService.DeleteUserSub(from, to);
+        }
         public List<UserShortModel> GetUserSubsById(int userId)
         {
             var userSubs = _noSQLDataService.GetUserSub(userId);

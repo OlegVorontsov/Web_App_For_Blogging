@@ -53,6 +53,24 @@ namespace BlogApp.Server.Data
                 return subForUser;
             }
         }
+        public UserSubs DeleteUserSub(int from, int to)
+        {
+            using (var db = new LiteDatabase(DBPath))
+            {
+                var subs = db.GetCollection<UserSubs>(SubsCollection);
+                var subForUser = subs.FindOne(x => x.Id == from);
+                if (subForUser != null)
+                {
+                    var sub = subForUser.UserSubsList.FirstOrDefault(s => s.Id == to);
+                    if (sub != null)
+                    {
+                        subForUser.UserSubsList.Remove(sub);
+                        subs.Update(subForUser);
+                    }
+                }
+                return subForUser;
+            }
+        }
         public NewsLike GetNewsLike(int newsId)
         {
             using (var db = new LiteDatabase(DBPath))

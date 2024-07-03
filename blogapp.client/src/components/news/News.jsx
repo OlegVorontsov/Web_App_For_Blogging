@@ -21,7 +21,7 @@ export const News = ({id, text, imgStr, date, isProfile, updateAction}) => {
     return (
         <div>
             { isProfile ? 
-            <div className="news-view-item">
+            <div className="news-view-item box-shadow-blue">
                 <div style={{display: 'flex', justifyContent: 'flex-end', gap: '10px'}}>
                     <ModalButton
                         btnName={'Edit post'}
@@ -37,7 +37,7 @@ export const News = ({id, text, imgStr, date, isProfile, updateAction}) => {
                     <NewsView id={id} date={date} text={text} imgStr={imgStr} />
                 </div>
             </div> :
-            <div className="news-view-item">
+            <div className="news-view-item box-shadow-blue">
                 <NewsView id={id} date={date} text={text} imgStr={imgStr} />
             </div>
         }
@@ -49,7 +49,7 @@ export const News = ({id, text, imgStr, date, isProfile, updateAction}) => {
 const NewsView = ({date, text, imgStr}) => {
     return (
         <div style={{display: 'flex', gap: '20px'}}>
-            <div style={{maxWidth: '350px', borderRadius: '5px', overflow: 'hidden'}}>
+            <div className="user-short-img" style={{height: '160px'}}>
                 <ImageComponent base64String={imgStr}/>
             </div>
             <div>
