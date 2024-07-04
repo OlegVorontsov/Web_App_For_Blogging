@@ -20,6 +20,10 @@ p {
     margin-bottom: 0.5rem !important;
 }
 
+small {
+    font-size: 1rem !important;
+}
+
 .btn-close {
     width: 25px;
     height: 25px;
@@ -161,6 +165,56 @@ p {
     border-radius: 5px;
     overflow: hidden;
 }
+
+.like-btn {
+    position: relative;
+    width: 32px;
+    height: 32px;
+}
+
+.like-btn::after {
+    position: absolute;
+    content: '';
+    left: -1px;
+    top: -2px;
+    width: 32px;
+    height: 32px;
+    background-image: url('../src/assets/like.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    scale: 1;
+    transition: scale .3s ease-in-out;
+}
+
+.like-btn:hover::after {
+    scale: 1.2;
+}
+
+.like-img {
+    position: relative;
+    left: 13px;
+    top: 10px;
+    width: 32px;
+    height: 32px;
+    color: #007bff;
+}
+
+.like-img::after {
+    position: absolute;
+    content: '';
+    left: -13px;
+    top: -8px;
+    width: 32px;
+    height: 32px;
+    background-image: url('../src/assets/like.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
 
 
 

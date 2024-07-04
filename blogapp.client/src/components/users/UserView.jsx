@@ -5,11 +5,18 @@ import NewsCreate from '../news/NewsCreate';
 import { createNews } from '../../services/newsService';
 import { PROFILE_URL } from '../../services/commonService';
 import { UserSubsView } from './UserSubsView';
+import { Button } from 'react-bootstrap';
+import { subscribeToUser } from '../../services/usersService';
 
 const UserView = ({user, isProfile}) => {
 
   const addNewNews = async (news) => {
     await createNews(news);
+    window.location.href = PROFILE_URL;
+  }
+
+  const subscribeClick = async (userId) => {
+    await subscribeToUser(userId);
     window.location.href = PROFILE_URL;
   }
 
@@ -25,7 +32,9 @@ const UserView = ({user, isProfile}) => {
             <p>{user.description}</p>
             { isProfile ? 
               <UserSubsView userId={user.id}/> :
-            <div></div>
+            <div>
+              <Button variant="outline-primary" onClick={() => subscribeClick(user.id)}>Subscribe</Button>
+            </div>
             }
           </div>
       </div>

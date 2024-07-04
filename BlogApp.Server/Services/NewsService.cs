@@ -95,6 +95,11 @@ namespace BlogApp.Server.Services
                                                   .Where(n => n.AuthorId == sub.Id).ToList();
                 allNews.AddRange(allNewsByAuthor.Select(ToView));
             }
+            foreach (var news in allNews)
+            {
+                var likes = _noSQLDataService.GetNewsLike(news.Id);
+                news.IsLikedByUser = likes?.UserIds.Contains(userId) ?? false;
+            }
             allNews.Sort(new NewsComparer());
             return allNews;
         }

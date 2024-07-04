@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import UserView from "./UserView";
-import { GetPublicUser, subscribeToUser } from "../../services/usersService";
+import { GetPublicUser } from "../../services/usersService";
 import { useParams } from "react-router-dom";
 
 const UserPublicView = () => {
@@ -16,10 +16,6 @@ const UserPublicView = () => {
       const params = useParams();
       const userId = params.userId;
 
-      const subscribeClick = () => {
-        subscribeToUser(userId);
-      }
-    
       // Загрузка данных пользователя с помощью useEffect и fetch
       useEffect(() => {
         const fetchUser = async () => {

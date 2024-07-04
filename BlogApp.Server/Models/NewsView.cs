@@ -8,5 +8,6 @@
         public int? LikesCount { get; set; }
         public DateTime PostDate { get; set; }
         public string NormalDate { get; set; }
+        public bool IsLikedByUser { get; set; }
     }
 }

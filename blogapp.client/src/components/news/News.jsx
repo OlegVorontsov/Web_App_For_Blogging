@@ -1,12 +1,13 @@
 import ImageComponent from "../ImageComponent";
 import { useEffect, useState } from "react";
-import { deleteNews, getNews, getNewsByUser, updateNews } from "../../services/newsService";
+import { deleteNews, getNews, getNewsByUser, likeToNews, updateNews } from "../../services/newsService";
 import { Button } from "react-bootstrap";
 import ModalButton from "../ModalButton";
 import NewsCreate from "./NewsCreate";
+import { ALLNEWS_URL } from "../../services/commonService";
 
 // один пост
-export const News = ({id, text, imgStr, date, isProfile, updateAction}) => {
+export const News = ({id, text, imgStr, date, likes, isProfile, updateAction}) => {
 
     const updateNewsView = async (news) => {
         await updateNews(news);
@@ -34,11 +35,11 @@ export const News = ({id, text, imgStr, date, isProfile, updateAction}) => {
                     <Button variant="outline-danger" onClick={() => deleteNewsView()}>Delete post</Button>
                 </div>
                 <div>
-                    <NewsView id={id} date={date} text={text} imgStr={imgStr} />
+                    <NewsView id={id} date={date} text={text} likes={likes} imgStr={imgStr} />
                 </div>
             </div> :
             <div className="news-view-item box-shadow-blue">
-                <NewsView id={id} date={date} text={text} imgStr={imgStr} />
+                <NewsView id={id} date={date} text={text} likes={likes} imgStr={imgStr} />
             </div>
         }
         </div>
@@ -46,7 +47,13 @@ export const News = ({id, text, imgStr, date, isProfile, updateAction}) => {
 }
 
 //работает
-const NewsView = ({date, text, imgStr}) => {
+const NewsView = ({id, date, text, imgStr, likes, liked}) => {
+
+    const likeClick = async (newsId) => {
+        await likeToNews(newsId);
+        window.location.href = ALLNEWS_URL;
+      }
+
     return (
         <div style={{display: 'flex', gap: '20px'}}>
             <div className="user-short-img" style={{height: '160px'}}>
@@ -55,6 +62,12 @@ const NewsView = ({date, text, imgStr}) => {
             <div>
                 <p>{date}</p>
                 <p>{text}</p>
+                {liked === false ? 
+                    <button className="btn like-btn" onClick={() => likeClick(id)}>
+                        <small style={{color: '#007bff'}}>{likes}</small>
+                    </button> :
+                    <div className="like-img"> {likes}</div>
+                }
             </div>
         </div>
     )
@@ -82,6 +95,7 @@ export const NewsProfileView = ({userId, isProfile}) => {
                     text = {el.text} 
                     imgStr={el.img} 
                     date={el.normalDate}
+                    likes={el.likesCount}
                     isProfile={isProfile}
                     updateAction={getAllNews}
                 />
@@ -106,11 +120,14 @@ export const NewsForUser = () => {
         <div>
             {news.map((el, key) => {
                 return (
-                    <div className="news-view-item">
+                    <div className="news-view-item box-shadow-blue">
                         <NewsView key={key}
+                                id = {el.id}
                                 date={el.normalDate}
                                 text={el.text}
-                                imgStr={el.img}/>
+                                imgStr={el.img}
+                                likes={el.likesCount}
+                                liked={el.isLikedByUser}/>
                     </div>
                 )
             })}

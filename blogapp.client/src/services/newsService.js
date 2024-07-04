@@ -25,3 +25,7 @@ export async function updateNews(news) {
 export async function deleteNews(newsId) {
     await sendRequestWithToken(`${NEWS_URL}/${newsId}`, 'DELETE');
 }
+
+export async function likeToNews(newsId) {
+    await sendRequestWithToken(`${NEWS_URL}/Like/${newsId}`, 'POST', newsId);
+}
