@@ -56,7 +56,7 @@ const NewsView = ({id, date, text, imgStr, likes, liked}) => {
 
     return (
         <div style={{display: 'flex', gap: '20px'}}>
-            <div className="user-short-img" style={{height: '160px'}}>
+            <div className="user-short-img">
                 <ImageComponent base64String={imgStr}/>
             </div>
             <div>
