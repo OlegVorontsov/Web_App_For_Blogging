@@ -169,6 +169,8 @@ small {
     overflow: hidden;
 }
 
+/* like news */
+
 .like-btn {
     position: relative;
     width: 32px;
@@ -211,6 +213,55 @@ small {
     width: 32px;
     height: 32px;
     background-image: url('../src/assets/like.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* dislike news */
+
+.dislike-btn {
+    position: relative;
+    width: 32px;
+    height: 32px;
+}
+
+.dislike-btn::after {
+    position: absolute;
+    content: '';
+    left: -1px;
+    top: -2px;
+    width: 32px;
+    height: 32px;
+    background-image: url('../src/assets/dislike.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    scale: 1;
+    transition: scale .3s ease-in-out;
+}
+
+.dislike-btn:hover::after {
+    scale: 1.2;
+}
+
+.dislike-img {
+    position: relative;
+    left: 13px;
+    top: 10px;
+    width: 32px;
+    height: 32px;
+    color: #dc3545;
+}
+
+.dislike-img::after {
+    position: absolute;
+    content: '';
+    left: -10px;
+    top: 2px;
+    width: 32px;
+    height: 32px;
+    background-image: url('../src/assets/dislike.svg');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;

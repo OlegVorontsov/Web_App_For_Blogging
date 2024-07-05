@@ -1,5 +1,4 @@
 ﻿using LiteDB;
-using System.Reflection;
 
 namespace BlogApp.Server.Data
 {
@@ -9,6 +8,7 @@ namespace BlogApp.Server.Data
 
         private const string SubsCollection = "SubsCollection";
         private const string NewsLikesCollection = "NewsLikesCollection";
+        private const string NewsDislikesCollection = "NewsDislikesCollection";
 
         public UserSubs GetUserSub(int userId)
         {
@@ -80,18 +80,34 @@ namespace BlogApp.Server.Data
                 return newsLike;
             }
         }
+        public NewsLike GetNewsDislike(int newsId)
+        {
+            using (var db = new LiteDatabase(DBPath))
+            {
+                var dislikes = db.GetCollection<NewsLike>(NewsDislikesCollection);
+                var newsDislike = dislikes.FindOne(x => x.NewsId == newsId);
+                return newsDislike;
+            }
+        }
         public NewsLike SetNewsLike(int from, int newsId)
         {
             using (var db = new LiteDatabase(DBPath))
             {
                 var likes = db.GetCollection<NewsLike>(NewsLikesCollection);
+                var disLikes = db.GetCollection<NewsDislike>(NewsDislikesCollection);
                 var newsLikes = likes.FindOne(x => x.NewsId == newsId);
+                var newsDislikes = disLikes.FindOne(d => d.NewsId == newsId);
                 if (newsLikes != null)
                 {
                     if (!newsLikes.UserIds.Contains(from))
                     {
                         newsLikes.UserIds.Add(from);
                         likes.Update(newsLikes);
+                        if (newsDislikes.UserIds.Contains(from))
+                        {
+                            newsDislikes.UserIds.Remove(from);
+                            disLikes.Update(newsDislikes);
+                        }
                     }
                 }
                 else
@@ -107,6 +123,47 @@ namespace BlogApp.Server.Data
                     newsLikes = newLikeForNews;
                 }
                 return newsLikes;
+            }
+        }
+        public NewsDislike SetNewsDislike(int from, int newsId)
+        {
+            using (var db = new LiteDatabase(DBPath))
+            {
+                var likes = db.GetCollection<NewsLike>(NewsLikesCollection);
+                var disLikes = db.GetCollection<NewsDislike>(NewsDislikesCollection);
+                //получаем лайки и дислайки конктретного поста
+                var newsLikes = likes.FindOne(l => l.NewsId == newsId);
+                var newsDislikes = disLikes.FindOne(d => d.NewsId == newsId);
+                //если есть дислайки
+                if(newsDislikes != null)
+                {
+                    //есть ли дислайки от конктретного юзера
+                    if (!newsDislikes.UserIds.Contains(from))
+                    {
+                        //если нет добавляем дислайк
+                        newsDislikes.UserIds.Add(from);
+                        disLikes.Update(newsDislikes);
+                        //есть ли лайк от конктретного юзера на этот пост
+                        if (newsLikes.UserIds.Contains(from))
+                        {
+                            //лайк есть - убираем его
+                            newsLikes.UserIds.Remove(from);
+                            likes.Update(newsLikes);
+                        }
+                    }
+                }
+                else
+                {
+                    var newDislikeForNews = new NewsDislike
+                    {
+                        NewsId = newsId,
+                        UserIds = new List<int> { from }
+                    };
+                    disLikes.Insert(newDislikeForNews);
+                    disLikes.EnsureIndex(x => x.NewsId);
+                    newsDislikes = newDislikeForNews;
+                }
+                return newsDislikes;
             }
         }
     }

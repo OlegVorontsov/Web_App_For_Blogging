@@ -29,3 +29,7 @@ export async function deleteNews(newsId) {
 export async function likeToNews(newsId) {
     await sendRequestWithToken(`${NEWS_URL}/Like/${newsId}`, 'POST', newsId);
 }
+
+export async function disLikeToNews(newsId) {
+    await sendRequestWithToken(`${NEWS_URL}/Dislike/${newsId}`, 'POST', newsId);
+}

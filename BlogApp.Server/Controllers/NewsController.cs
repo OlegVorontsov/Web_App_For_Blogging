@@ -90,5 +90,16 @@ namespace BlogApp.Server.Controllers
             _newsService.SetLike(newsId, currentUser.Id);
             return Ok();
         }
+        [HttpPost("Dislike/{newsId}")]
+        public IActionResult SetDislike(int newsId)
+        {
+            var currentUser = _userService.GetUserByLogin(HttpContext.User.Identity.Name);
+            if (currentUser == null)
+            {
+                return NotFound();
+            }
+            _newsService.SetDislike(newsId, currentUser.Id);
+            return Ok();
+        }
     }
 }

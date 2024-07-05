@@ -99,6 +99,9 @@ namespace BlogApp.Server.Services
             {
                 var likes = _noSQLDataService.GetNewsLike(news.Id);
                 news.IsLikedByUser = likes?.UserIds.Contains(userId) ?? false;
+
+                var dislikes = _noSQLDataService.GetNewsDislike(news.Id);
+                news.IsDislikedByUser = dislikes?.UserIds.Contains(userId) ?? false;
             }
             allNews.Sort(new NewsComparer());
             return allNews;
@@ -109,10 +112,16 @@ namespace BlogApp.Server.Services
                 from: userId,
                 newsId: newsId);
         }
-
+        public void SetDislike(int newsId, int userId)
+        {
+            _noSQLDataService.SetNewsDislike(
+                from: userId,
+                newsId: newsId);
+        }
         private NewsView ToView(News news)
         {
             var likes = _noSQLDataService.GetNewsLike(news.Id);
+            var dislikes = _noSQLDataService.GetNewsDislike(news.Id);
             var newsModel = new NewsView
             {
                 Id = news.Id,
@@ -120,7 +129,8 @@ namespace BlogApp.Server.Services
                 Img = news.Img,
                 PostDate = news.PostDate,
                 NormalDate = $"{news.PostDate:f}",
-                LikesCount = likes?.UserIds.Count ?? 0
+                LikesCount = likes?.UserIds.Count ?? 0,
+                DisLikesCount = dislikes?.UserIds.Count ?? 0
             };
             return newsModel;
         }

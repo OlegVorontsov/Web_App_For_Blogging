@@ -6,8 +6,10 @@
         public string Text { get; set; }
         public object Img { get; set; }
         public int? LikesCount { get; set; }
+        public int? DisLikesCount { get; set; }
         public DateTime PostDate { get; set; }
         public string NormalDate { get; set; }
         public bool IsLikedByUser { get; set; }
+        public bool IsDislikedByUser { get; set; }
     }
 }
