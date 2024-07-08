@@ -140,6 +140,10 @@ namespace BlogApp.Server.Services
         {
             var userSubs = _noSQLDataService.GetUserSub(userId);
             var users = new List<UserShortModel>();
+            if (userSubs == null)
+            {
+                return users;
+            }
             foreach (var sub in userSubs.UserSubsList)
             {
                 var user = _dataContext.Users.FirstOrDefault(u => u.Id == sub.Id);

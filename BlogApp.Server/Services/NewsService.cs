@@ -118,6 +118,12 @@ namespace BlogApp.Server.Services
                 from: userId,
                 newsId: newsId);
         }
+        public void RemoveLike(int newsId, int userId)
+        {
+            _noSQLDataService.RemoveNewsLike(
+                from: userId,
+                newsId: newsId);
+        }
         private NewsView ToView(News news)
         {
             var likes = _noSQLDataService.GetNewsLike(news.Id);

@@ -89,6 +89,25 @@ namespace BlogApp.Server.Data
                 return newsDislike;
             }
         }
+
+        public NewsLike RemoveNewsLike(int from, int newsId)
+        {
+            using (var db = new LiteDatabase(DBPath))
+            {
+                var likes = db.GetCollection<NewsLike>(NewsLikesCollection);
+                var newsLikes = likes.FindOne(x => x.NewsId == newsId);
+                if (newsLikes != null)
+                {
+                    if (newsLikes.UserIds.Contains(from))
+                    {
+                        newsLikes.UserIds.Remove(from);
+                        likes.Update(newsLikes);
+                    }
+                }
+                return newsLikes;
+            }
+        }
+
         public NewsLike SetNewsLike(int from, int newsId)
         {
             using (var db = new LiteDatabase(DBPath))
@@ -121,6 +140,12 @@ namespace BlogApp.Server.Data
                     likes.EnsureIndex(x => x.NewsId);
 
                     newsLikes = newLikeForNews;
+
+                    if (newsDislikes!=null && newsDislikes.UserIds.Contains(from))
+                    {
+                        newsDislikes.UserIds.Remove(from);
+                        disLikes.Update(newsDislikes);
+                    }
                 }
                 return newsLikes;
             }
@@ -154,6 +179,7 @@ namespace BlogApp.Server.Data
                 }
                 else
                 {
+                    //добавляем дислайк
                     var newDislikeForNews = new NewsDislike
                     {
                         NewsId = newsId,
@@ -162,6 +188,12 @@ namespace BlogApp.Server.Data
                     disLikes.Insert(newDislikeForNews);
                     disLikes.EnsureIndex(x => x.NewsId);
                     newsDislikes = newDislikeForNews;
+                    //убираем лайк
+                    if (newsLikes != null && newsLikes.UserIds.Contains(from))
+                    {
+                        newsLikes.UserIds.Remove(from);
+                        likes.Update(newsLikes);
+                    }
                 }
                 return newsDislikes;
             }

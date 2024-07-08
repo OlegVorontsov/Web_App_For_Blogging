@@ -101,5 +101,16 @@ namespace BlogApp.Server.Controllers
             _newsService.SetDislike(newsId, currentUser.Id);
             return Ok();
         }
+        [HttpDelete("Like/{newsId}")]
+        public IActionResult RemoveLike(int newsId)
+        {
+            var currentUser = _userService.GetUserByLogin(HttpContext.User.Identity.Name);
+            if (currentUser == null)
+            {
+                return NotFound();
+            }
+            _newsService.RemoveLike(newsId, currentUser.Id);
+            return Ok();
+        }
     }
 }
